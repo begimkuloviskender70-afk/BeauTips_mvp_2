@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация - BeauTips</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./auth.css">
+  <link rel="stylesheet" href="./notifications.css">
+  <!-- intl-tel-input -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.5.3/css/intlTelInput.css">
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="logo-nav-container">
+      <div class="logo">
+        <img id="logo" src="./images/logo.png" alt="BeauTips logo">
+      </div>
+
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="./index.html" class="nav-link">Главная</a></li>
+          <li><a href="./index.html#about" class="nav-link">О нас</a></li>
+          <li><a href="./history.html" class="nav-link">История</a></li>
+          <li><a href="./index.html#footer22" class="nav-link">Контакты</a></li>
+
+        </ul>
+      </nav>
+    </div>
+
+    <div class="search-profile">
+      <div class="profile-wrapper">
+        <a href="./profile.html" class="profile-icon">
+          <img src="./images/profile.png" alt="Profile icon">
+        </a>
+
+        <div class="menu-lines">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+  <main class="auth-page">
+    <!-- Форма регистрации -->
+    <section class="auth-register auth-section active" id="registerSection">
+      <h1 class="auth-title-main">Зарегистрироваться</h1>
+
+      <p class="auth-switch">
+        Уже есть аккаунт?
+        <a href="javascript:void(0)" class="auth-switch-link" data-target="loginSection">Войти</a>
+      </p>
+
+      <form class="auth-form" id="registerForm" action="#" novalidate>
+
+        <!-- Email -->
+        <div class="auth-field" data-field="email">
+          <label for="reg-email" class="auth-label">Email</label>
+          <input type="email" id="reg-email" name="email" class="auth-input" placeholder="">
+          <div class="auth-error-message"></div>
+        </div>
+
+        <!-- Nickname -->
+        <div class="auth-field" data-field="nickname">
+          <label for="nickname" class="auth-label">Nickname</label>
+          <input type="text" id="nickname" name="nickname" class="auth-input" placeholder="">
+          <div class="auth-error-message"></div>
+        </div>
+
+        <!-- Телефон -->
+        <div class="auth-field" data-field="phone">
+          <label for="phone" class="auth-label">Номер телефона</label>
+          <input type="tel" id="phone" name="phone" class="auth-input">
+          <div class="auth-error-message"></div>
+        </div>
+
+        <!-- Пароль -->
+        <div class="auth-field" data-field="password">
+          <label for="reg-password" class="auth-label">Пароль</label>
+
+          <div class="auth-input-wrapper">
+            <input type="password" id="reg-password" name="password" class="auth-input auth-input--password"
+              placeholder="">
+            <button type="button" class="password-toggle" aria-label="Показать пароль"></button>
+          </div>
+
+          <div class="auth-error-message"></div>
+        </div>
+
+        <button type="submit" class="auth-submit">Зарегистрироваться</button>
+      </form>
+    </section>
+
+    <!-- Форма входа -->
+    <section class="auth-login auth-section" id="loginSection">
+      <h1 class="auth-title-main">Войти</h1>
+
+      <p class="auth-switch">
+        Нет аккаунта?
+        <a href="javascript:void(0)" class="auth-switch-link" data-target="registerSection">Зарегистрироваться</a>
+      </p>
+
+      <form class="auth-form" id="loginForm" action="#" novalidate>
+
+        <!-- Email -->
+        <div class="auth-field" data-field="email">
+          <label for="login-email" class="auth-label">Email</label>
+          <input type="email" id="login-email" name="email" class="auth-input" placeholder="">
+          <div class="auth-error-message"></div>
+        </div>
+
+        <!-- Пароль -->
+        <div class="auth-field" data-field="password">
+          <label for="login-password" class="auth-label">Пароль</label>
+
+          <div class="auth-input-wrapper">
+            <input type="password" id="login-password" name="password" class="auth-input auth-input--password"
+              placeholder="">
+            <button type="button" class="password-toggle" aria-label="Показать пароль"></button>
+          </div>
+
+          <div class="auth-error-message"></div>
+        </div>
+
+        <!-- Запомнить меня и Забыли пароль -->
+        <div class="auth-options">
+          <label class="auth-checkbox">
+            <input type="checkbox" name="remember" id="remember">
+            <span class="auth-checkbox-text">Запомнить меня</span>
+          </label>
+          <a href="#" class="auth-forgot-link">Забыли пароль?</a>
+        </div>
+
+        <button type="submit" class="auth-submit">Войти</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.5.3/js/intlTelInput.min.js"></script>
+  <script src="./api.js"></script>
+  <script src="./notifications.js"></script>
+  <script src="./auth.js?v=2.2"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>BeauTips – Консультант</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./chat.css">
+  <link rel="stylesheet" href="./ai_results.css">
+  <link rel="stylesheet" href="./notifications.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="body-chat">
+  <header class="navbar">
+    <div class="logo-nav-container">
+      <div class="logo">
+        <img id="logo" src="./images/logo.png" alt="BeauTips logo">
+      </div>
+
+      <nav class="nav">
+        <ul class="nav-links">
+          <li><a href="./index.html" class="nav-link">Главная</a></li>
+          <li><a href="./index.html#about" class="nav-link">О нас</a></li>
+          <li><a href="./history.html" class="nav-link">История</a></li>
+          <li><a href="./index.html#footer22" class="nav-link">Контакты</a></li>
+
+        </ul>
+      </nav>
+    </div>
+
+    <div class="search-profile">
+      <div class="profile-wrapper">
+        <a href="./profile.html" class="profile-icon">
+          <img src="./images/profile.png" alt="Profile icon">
+        </a>
+
+        <div class="menu-lines">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="chat-main">
+    <section class="choose-section">
+
+      <!-- ШАГ 0: Приветствие -->
+      <div class="step-container" id="step0">
+        <div class="welcome-layout">
+          <div class="welcome-character-block">
+            <div class="chat-bubble">
+              <img src="./images/Union.png" alt="" class="chat-bubble-bg">
+              <span class="chat-bubble-text">Чем тебе помочь?</span>
+            </div>
+            <div class="chat-character">
+              <img src="./images/Frame.png" alt="Beautips character">
+            </div>
+          </div>
+
+          <div class="welcome-right">
+            <div class="welcome-menu">
+              <div class="menu-item" data-action="skin-care">
+                <span class="menu-item-text">Подобрать уход для моей кожи</span>
+              </div>
+              <div class="menu-item" data-action="product-compatibility">
+                <span class="menu-item-text">Можно ли сочетать эти средства?</span>
+              </div>
+              <div class="menu-item" data-action="routine-analysis">
+                <span class="menu-item-text">Разобрать мою косметику</span>
+              </div>
+              <div class="menu-item" data-action="product-guide">
+                <span class="menu-item-text">Объясни, как использовать средство</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ШАГ 1: Состояние кожи -->
+      <div class="step-container hidden" id="step1">
+        <div class="choose-panel skin-cards-panel">
+          <div class="skin-cards-grid">
+
+            <div class="skin-card" data-value="dehydrated">
+              <span class="skin-card-title">Обезвоженная</span>
+              <span class="skin-card-desc">Стягивает, не хватает влаги</span>
+            </div>
+
+            <div class="skin-card" data-value="sensitive">
+              <span class="skin-card-title">Чувствительная</span>
+              <span class="skin-card-desc">Часто реагирует на уход и погоду</span>
+            </div>
+
+            <div class="skin-card" data-value="inflammation">
+              <span class="skin-card-title">С воспалениями</span>
+              <span class="skin-card-desc">Прыщи, покраснения или болезненность</span>
+            </div>
+
+            <div class="skin-card" data-value="pigmentation">
+              <span class="skin-card-title">С пигментацией</span>
+              <span class="skin-card-desc">Пятна, следы от солнца или акне</span>
+            </div>
+
+            <div class="skin-card" data-value="dull">
+              <span class="skin-card-title">Тусклая</span>
+              <span class="skin-card-desc">Нет сияния, выглядит уставшей</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ШАГ 1.1: Уточнение для ПИГМЕНТАЦИИ -->
+      <div class="step-container hidden" id="stepPigmentationType">
+        <div class="choose-panel skin-cards-panel">
+          <div class="skin-cards-grid">
+
+            <div class="skin-card pigmentation-option" data-value="post-inflammatory">
+              <span class="skin-card-title">Поствоспалительные</span>
+              <span class="skin-card-desc">Следы от прыщей, акне</span>
+            </div>
+
+            <div class="skin-card pigmentation-option" data-value="sun-freckles">
+              <span class="skin-card-title">Солнечные / веснушки</span>
+              <span class="skin-card-desc">Появились от загара или с детства</span>
+            </div>
+
+            <div class="skin-card pigmentation-option" data-value="age-spots">
+              <span class="skin-card-title">Возрастные пятна</span>
+              <span class="skin-card-desc">Лентиго, появились с возрастом</span>
+            </div>
+
+            <div class="skin-card pigmentation-option" data-value="melasma">
+              <span class="skin-card-title">Мелазма</span>
+              <span class="skin-card-desc">Гормональные пятна, часто симметричные</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- ШАГ 1.2: Уточнение для ЧУВСТВИТЕЛЬНОСТИ -->
+      <div class="step-container hidden" id="stepSensitivityType">
+        <div class="choose-panel skin-cards-panel">
+          <div class="skin-cards-grid">
+
+            <div class="skin-card sensitivity-option" data-value="Покраснение, жжение">
+              <span class="skin-card-title">Покраснение, жжение</span>
+              <span class="skin-card-desc">Кожа краснеет и печёт от уходовых средств</span>
+            </div>
+
+            <div class="skin-card sensitivity-option" data-value="Шелушение, сухость">
+              <span class="skin-card-title">Шелушение, сухость</span>
+              <span class="skin-card-desc">Появляются сухие участки и шелушения</span>
+            </div>
+
+            <div class="skin-card sensitivity-option" data-value="Зуд, сыпь">
+              <span class="skin-card-title">Зуд, сыпь</span>
+              <span class="skin-card-desc">Кожа чешется, появляются высыпания</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ШАГ 1.3: Уточнение для ОБЕЗВОЖЕННОСТИ (multi-select) -->
+      <div class="step-container hidden" id="stepDehydrationType">
+        <div class="choose-panel skin-cards-panel">
+          <div class="skin-cards-grid">
+
+            <div class="skin-card dehydration-option" data-value="Стянутость после умывания">
+              <span class="skin-card-title">Стянутость после умывания</span>
+              <span class="skin-card-desc">Кожа «трещит», неприятные ощущения</span>
+            </div>
+
+            <div class="skin-card dehydration-option" data-value="Шелушение, сухие участки">
+              <span class="skin-card-title">Шелушение, сухие участки</span>
+              <span class="skin-card-desc">Особенно на щеках, висках, вокруг глаз</span>
+            </div>
+
+            <div class="skin-card dehydration-option" data-value="Парадоксальный жирный блеск">
+              <span class="skin-card-title">Парадоксальный жирный блеск</span>
+              <span class="skin-card-desc">Т-зона блестит, но чувствуется сухость внутри</span>
+            </div>
+
+            <div class="skin-card dehydration-option" data-value="Мелкие морщинки от обезвоживания">
+              <span class="skin-card-title">Мелкие морщинки</span>
+              <span class="skin-card-desc">Заметны при мимике, разглаживаются после крема</span>
+            </div>
+
+            <div class="skin-card dehydration-option" data-value="Чувствительность к ветру и холоду">
+              <span class="skin-card-title">Чувствительность к погоде</span>
+              <span class="skin-card-desc">Быстро реагирует на ветер и холод</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- ШАГ 1.4: Уточнение для ТУСКЛОСТИ (multi-select) -->
+      <div class="step-container hidden" id="stepDullType">
+        <div class="choose-panel skin-cards-panel">
+          <div class="skin-cards-grid">
+
+            <div class="skin-card dull-option" data-value="fatigue">
+              <span class="skin-card-title">Недосып / усталость</span>
+              <span class="skin-card-desc">Кожа выглядит уставшей из-за образа жизни</span>
+            </div>
+
+            <div class="skin-card dull-option" data-value="lack-hydration">
+              <span class="skin-card-title">Недостаточное увлажнение</span>
+              <span class="skin-card-desc">Коже не хватает влаги и питания</span>
+            </div>
+
+            <div class="skin-card dull-option" data-value="dead-cells">
+              <span class="skin-card-title">Накопление мёртвых клеток</span>
+              <span class="skin-card-desc">Кожа не обновляется, нужен пилинг</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ШАГ 1.5: Уточнение для ВОСПАЛЕНИЙ (multi-select) -->
+      <div class="step-container hidden" id="stepInflammationType">
+        <div class="choose-panel skin-cards-panel">
+          <div class="skin-cards-grid">
+
+            <div class="skin-card inflammation-option" data-value="comedones">
+              <span class="skin-card-title">Чёрные / белые точки</span>
+              <span class="skin-card-desc">Комедоны, закупоренные поры</span>
+            </div>
+
+            <div class="skin-card inflammation-option" data-value="red-pimples">
+              <span class="skin-card-title">Красные прыщи</span>
+              <span class="skin-card-desc">Воспалённые папулы и пустулы</span>
+            </div>
+
+            <div class="skin-card inflammation-option" data-value="deep-painful">
+              <span class="skin-card-title">Глубокие болезненные</span>
+              <span class="skin-card-desc">Кисты и узлы под кожей</span>
+            </div>
+
+            <div class="skin-card inflammation-option" data-value="post-acne">
+              <span class="skin-card-title">Следы / постакне</span>
+              <span class="skin-card-desc">Пятна и рубцы от прошлых воспалений</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- ШАГ 2: Тип кожи -->
+      <div class="step-container hidden" id="step2">
+        <div class="choose-panel options-panel">
+          <div class="options-list">
+
+            <div class="option-item" data-value="oily">
+              <span class="option-text">Жирная — кожа быстро блестит, особенно в Т-зоне</span>
+            </div>
+
+            <div class="option-item" data-value="dry">
+              <span class="option-text">Сухая — часто чувствуется стянутость и сухость</span>
+            </div>
+
+            <div class="option-item" data-value="combination">
+              <span class="option-text">Комбинированная — жирная в Т-зоне, сухая на щеках</span>
+            </div>
+
+            <div class="option-item" data-value="normal">
+              <span class="option-text">Нормальная — без сильной сухости и жирного блеска</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ШАГ 3 для (Подобрать уход для моей кожи): Аллергия -->
+      <div class="step-container hidden" id="stepAllergy">
+        <div class="choose-panel skin-cards-panel">
+
+          <div class="skin-cards-grid">
+
+            <div class="skin-card allergy-option" data-value="known">
+              <span class="skin-card-title">Знаю аллерген</span>
+              <span class="skin-card-desc">
+                У меня есть реакция на конкретные ингредиенты
+              </span>
+            </div>
+
+            <div class="skin-card allergy-option" data-value="unknown">
+              <span class="skin-card-title">Бывают реакции</span>
+              <span class="skin-card-desc">
+                Иногда кожа реагирует, но не знаю на что
+              </span>
+            </div>
+
+            <div class="skin-card allergy-option" data-value="none">
+              <span class="skin-card-title">Нет аллергий</span>
+              <span class="skin-card-desc">
+                Кожа нормально переносит уход
+              </span>
+            </div>
+
+          </div>
+
+          <!-- Поле ввода (скрыто по умолчанию) -->
+          <div class="allergy-input hidden" id="allergyInput">
+            <textarea class="allergy-textarea" placeholder="Например: спирт, отдушки, ниацинамид..."></textarea>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ШАГ 4 для (Подобрать уход для моей кожи): Длительность проблемы -->
+      <div class="step-container hidden" id="stepDuration">
+        <div class="choose-panel skin-cards-panel">
+
+          <div class="skin-cards-grid">
+
+            <div class="skin-card duration-option" data-value="recent">
+              <span class="skin-card-title">Недавно</span>
+              <span class="skin-card-desc">
+                Меньше месяца назад
+              </span>
+            </div>
+
+            <div class="skin-card duration-option" data-value="long">
+              <span class="skin-card-title">Давно</span>
+              <span class="skin-card-desc">
+                Несколько месяцев или лет
+              </span>
+            </div>
+
+            <div class="skin-card duration-option" data-value="periodic">
+              <span class="skin-card-title">Периодически</span>
+              <span class="skin-card-desc">
+                Проблема то появляется, то уходит
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ШАГ 5 для (Подобрать уход для моей кожи): Бюджет -->
+      <div class="step-container hidden" id="stepBudget">
+        <div class="choose-panel skin-cards-panel">
+
+          <div class="skin-cards-grid skin-cards-grid--4cols">
+
+            <div class="skin-card budget-option" data-value="500">
+              <span class="skin-card-title">До 500 сом</span>
+              <span class="skin-card-desc">Бюджетный уход</span>
+            </div>
+
+            <div class="skin-card budget-option" data-value="1000">
+              <span class="skin-card-title">До 1000 сом</span>
+              <span class="skin-card-desc">Средний сегмент</span>
+            </div>
+
+            <div class="skin-card budget-option" data-value="1500">
+              <span class="skin-card-title">До 1500 сом</span>
+              <span class="skin-card-desc">Выше среднего</span>
+            </div>
+
+            <div class="skin-card budget-option" data-value="any">
+              <span class="skin-card-title">Бюджет не важен</span>
+              <span class="skin-card-desc">Подберите лучшее</span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ШАГ: Результаты -->
+      <div class="step-container hidden" id="stepResults">
+        <div class="choose-panel results-panel">
+          <div id="aiLoading" class="ai-loading-container">
+            <p>🤖 Анализируем ваши ответы...</p>
+            <!-- Простой CSS лоадер -->
+            <div class="loader"
+              style="border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite; margin: 20px auto;">
+            </div>
+            <style>
+              @keyframes spin {
+                0% {
+                  transform: rotate(0deg);
+                }
+
+                100% {
+                  transform: rotate(360deg);
+                }
+              }
+            </style>
+          </div>
+          <!-- Скрытые элементы, нужны для совместимости с JS -->
+          <div id="aiResponseContent"></div>
+          <div id="resultsActions" class="hidden"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ПОМОЩНИК -->
+    <div class="chat-helper-wrapper">
+      <div class="chat-helper" id="chatHelper">
+        <div class="chat-bubble">
+          <img src="./images/Union.png" alt="" class="chat-bubble-bg">
+          <span class="chat-bubble-text" id="chatText"></span>
+        </div>
+        <div class="chat-character">
+          <img src="./images/Frame.png" alt="Beautips character">
+        </div>
+      </div>
+
+      <a href="#" class="nav-btn nav-btn--back" id="backBtn">
+        <span class="nav-btn-text">Назад</span>
+        <span class="nav-btn-circle">
+          <img src="./images/arrow-left.png" alt="">
+        </span>
+      </a>
+
+      <a href="#" class="nav-btn nav-btn--next" id="nextBtn">
+        <span class="nav-btn-circle">
+          <img src="./images/arrow-right.png" alt="">
+        </span>
+        <span class="nav-btn-text">Далее</span>
+      </a>
+    </div>
+  </main>
+
+  <script src="./api.js"></script>
+  <script src="./notifications.js"></script>
+  <script src="./quiz_transform.js"></script>
+  <script src="./script_chat.js"></script>
+</body>
+
+</html>

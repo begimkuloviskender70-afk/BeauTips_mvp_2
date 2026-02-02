@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтверждение Email - BeauTips</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./notifications.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 24px;
+            padding: 50px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .message {
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 30px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-icon {
+            font-size: 80px;
+            margin: 20px 0;
+        }
+
+        .error-icon {
+            font-size: 80px;
+            margin: 20px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .secondary-button {
+            background: #ecf0f1;
+            color: #2c3e50;
+            margin-left: 10px;
+        }
+
+        .secondary-button:hover {
+            background: #bdc3c7;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Loading State -->
+        <div id="loading" class="hidden">
+            <div class="logo">✨</div>
+            <h1>Подтверждение Email</h1>
+            <div class="spinner"></div>
+            <p class="message">Пожалуйста, подождите...</p>
+        </div>
+
+        <!-- Success State -->
+        <div id="success" class="hidden">
+            <div class="success-icon">🎉</div>
+            <h1>Email Подтверждён!</h1>
+            <p class="message">
+                Ваш email успешно подтверждён.<br>
+                Теперь вы можете войти в систему.
+            </p>
+            <a href="./register.html" class="button">Войти</a>
+        </div>
+
+        <!-- Error State -->
+        <div id="error" class="hidden">
+            <div class="error-icon">❌</div>
+            <h1>Ошибка Подтверждения</h1>
+            <p class="message" id="errorMessage">
+                Не удалось подтвердить ваш email.
+            </p>
+            <a href="./register.html" class="button secondary-button">На главную</a>
+            <button onclick="resendEmail()" class="button">Отправить снова</button>
+        </div>
+
+        <!-- No Token State -->
+        <div id="notoken" class="hidden">
+            <div class="error-icon">⚠️</div>
+            <h1>Неверная Ссылка</h1>
+            <p class="message">
+                Ссылка верификации недействительна или отсутствует.
+            </p>
+            <a href="./register.html" class="button">На главную</a>
+        </div>
+    </div>
+
+    <script>
+        // Получаем токен из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        // Состояния
+        const loadingEl = document.getElementById('loading');
+        const successEl = document.getElementById('success');
+        const errorEl = document.getElementById('error');
+        const notokenEl = document.getElementById('notoken');
+        const errorMessageEl = document.getElementById('errorMessage');
+
+        function showState(state) {
+            [loadingEl, successEl, errorEl, notokenEl].forEach(el => {
+                el.classList.add('hidden');
+            });
+            state.classList.remove('hidden');
+        }
+
+        async function verifyEmail() {
+            if (!token) {
+                showState(notokenEl);
+                return;
+            }
+
+            showState(loadingEl);
+
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/api/auth/verify-email?token=${encodeURIComponent(token)}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showState(successEl);
+                    
+                    // Перенаправляем на страницу входа через 3 секунды
+                    setTimeout(() => {
+                        window.location.href = './register.html';
+                    }, 3000);
+                } else {
+                    errorMessageEl.textContent = data.detail || 'Не удалось подтвердить email. Возможно, ссылка истекла.';
+                    showState(errorEl);
+                }
+            } catch (error) {
+                console.error('Verification error:', error);
+                errorMessageEl.textContent = 'Произошла ошибка при подтверждении email.';
+                showState(errorEl);
+            }
+        }
+
+        async function resendEmail() {
+            const email = prompt('Введите ваш email для повторной отправки:');
+            if (!email) return;
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/auth/resend-verification', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    if (typeof notifications !== 'undefined') {
+                        notifications.success('Письмо отправлено! Проверьте ваш почтовый ящик.', 6000);
+                    } else {
+                        alert('✅ Письмо отправлено! Проверьте ваш почтовый ящик.');
+                    }
+                } else {
+                    const errorMsg = data.detail || 'Не удалось отправить письмо';
+                    if (typeof notifications !== 'undefined') {
+                        notifications.error(errorMsg, 6000);
+                    } else {
+                        alert('❌ ' + errorMsg);
+                    }
+                }
+            } catch (error) {
+                if (typeof notifications !== 'undefined') {
+                    notifications.error('Произошла ошибка при отправке письма', 6000);
+                } else {
+                    alert('❌ Произошла ошибка');
+                }
+            }
+        }
+
+        // Запускаем верификацию при загрузке
+        verifyEmail();
+    </script>
+    <script src="./notifications.js"></script>
+</body>
+</html>

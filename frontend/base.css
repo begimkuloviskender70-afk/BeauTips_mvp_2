@@ -1,0 +1,421 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: transparent;
+  color: #173B6C;
+  padding: 30px 80px 0;
+}
+
+body.page-index {
+  padding-top: 150px;
+  /* высота хедера + небольшой запас */
+}
+
+.body-chat {
+  padding-top: 100px;
+}
+
+
+
+html {
+  background: url("images/rectangle.png") no-repeat center top;
+  background-size: cover;
+
+}
+
+
+/* === ОБЩИЙ HEADER === */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 9999;
+
+  background: white;
+
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 30px 80px 20px;
+}
+
+.logo-nav-container {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+}
+
+.logo img {
+  width: auto;
+  height: auto;
+  display: block;
+  transform: translateY(-17px);
+}
+
+
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  list-style: none;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 30px;
+  font-size: 20px;
+  font-weight: 400;
+  border-radius: 40px;
+  border: 2px solid #173B6C;
+  color: #173B6C;
+  text-decoration: none;
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+
+
+.nav-link.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+  font-weight: 600;
+}
+
+
+.nav-link:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+  font-weight: 600;
+}
+
+
+
+.nav-link-dropdown img {
+  display: none;
+}
+
+
+
+.search-profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-icon {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.profile-icon img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  display: block;
+}
+
+
+
+
+
+
+/* ===  FOOTER === */
+.footer {
+  background: #000;
+  color: #fff;
+  margin: 80px -80px 0;
+  padding: 70px 80px;
+}
+
+/* контейнер внутри футера */
+.footer-inner {
+  max-width: 1800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  /* логотип слева, соцсети справа */
+  align-items: center;
+  /* выровнять по вертикали */
+}
+
+.footer-logo img {
+  height: 75px;
+  width: auto;
+}
+
+/* правая колонка */
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+}
+
+/* список соцсетей — ИСПРАВЛЕНО */
+.footer-social-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* одна строка — ИСПРАВЛЕНО */
+.footer-social-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.footer-social-text {
+  font-size: 17px;
+  text-align: right;
+  width: 80px;  /* фиксированная ширина для выравнивания иконок */
+}
+
+.footer-social-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+}
+
+
+
+.footer-instagram-link {
+  font-size: 13px;
+  color: #fff;
+  text-decoration: none;
+  max-width: 260px;
+  text-align: right;
+}
+
+.footer-instagram-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1366px) {
+
+  body {
+    padding: 25px 40px 0;
+  }
+
+  .navbar {
+    padding: 20px 40px 15px;
+  }
+
+  .logo-nav-container {
+    gap: 40px;
+  }
+
+  .nav-links {
+    gap: 25px;
+  }
+
+  .nav-link {
+    padding: 8px 22px;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+}
+
+@media (max-width: 1024px) {
+
+  body {
+    padding: 20px 30px 0;
+  }
+
+  body.page-index {
+    padding-top: 120px;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px 30px 15px;
+  }
+
+  .logo-nav-container {
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  body {
+    padding: 15px 20px 0;
+  }
+
+  body.page-index {
+    padding-top: 100px;
+  }
+
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  .logo-nav-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .nav-links {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .nav-link {
+    font-size: 16px;
+    padding: 8px 18px;
+    white-space: nowrap;
+  }
+
+}
+
+@media (max-width: 1366px) {
+  .footer {
+    margin: 60px -40px 0;
+    padding: 60px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    margin: 40px -20px 0;
+    padding: 40px 20px;
+  }
+}
+
+/* пробую*/
+
+/* сделай так */
+@media (max-width: 1200px) {
+
+  /* лёгкое уменьшение паддингов и gap */
+  body {
+    padding: 25px 40px 0;
+  }
+
+  .navbar {
+    padding: 20px 40px 15px;
+  }
+
+  .logo-nav-container {
+    gap: 40px;
+  }
+
+  .nav-links {
+    gap: 25px;
+  }
+
+  .nav-link {
+    padding: 8px 22px;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+}
+
+@media (max-width: 960px) {
+
+  /* начинается «слом» в две строки — уже планшеты */
+  body {
+    padding: 20px 30px 0;
+  }
+
+  body.page-index {
+    padding-top: 120px;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px 30px 15px;
+  }
+
+  .logo-nav-container {
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+  }
+
+}
+
+/* мобилка оставь как есть */
+@media (max-width: 768px) {
+  body {
+    padding: 15px 20px 0;
+  }
+
+  body.page-index {
+    padding-top: 100px;
+  }
+
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  .logo-nav-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .nav-links {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .nav-link {
+    font-size: 16px;
+    padding: 8px 18px;
+    white-space: nowrap;
+  }
+
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты анализа - BeauTips</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./base.css">
+    <link rel="stylesheet" href="./ai_results.css">
+</head>
+
+<body class="body-chat">
+    <!-- Header -->
+    <header class="navbar">
+        <div class="logo-nav-container">
+            <div class="logo">
+                <img id="logo" src="./images/logo.png" alt="BeauTips logo">
+            </div>
+
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="./index.html" class="nav-link">Главная</a></li>
+                    <li><a href="./index.html#about" class="nav-link">О нас</a></li>
+                    <li><a href="./history.html" class="nav-link">История</a></li>
+                    <li><a href="./index.html#footer22" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="search-profile">
+            <div class="profile-wrapper">
+                <a href="./profile.html" class="profile-icon">
+                    <img src="./images/profile.png" alt="Profile icon">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="ai-results-container">
+        <div id="loading-state" class="loading-container" style="display: none;">
+            <div class="progress-wrapper">
+                <h2 class="progress-title">Генерируем ваши рекомендации...</h2>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">0%</div>
+                </div>
+                <p class="progress-message" id="progressMessage">Анализируем ваши ответы...</p>
+            </div>
+        </div>
+
+        <!-- Результаты будут добавлены через JS -->
+    </main>
+
+    <script src="./api.js"></script>
+    <script src="./quiz_transform.js"></script>
+    <script src="./results.js"></script>
+</body>
+
+</html>

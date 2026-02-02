@@ -1,0 +1,1138 @@
+/* == СТРАНИЦА CHAT== */
+
+.chat-main {
+  position: relative;
+  padding: 20px 60px;
+  overflow: visible;
+}
+
+.choose-section {
+  position: relative;
+  text-align: center;
+  padding-top: 10px;
+  min-height: 500px;
+}
+
+/* ===============================
+   ШАГИ И ПЕРЕХОДЫ
+================================ */
+
+.step-container {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.4s;
+  visibility: visible;
+}
+
+.step-container.hidden {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Анимация появления шага (fade + slide) */
+.step-container.step-entering {
+  animation: stepEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.step-container.step-exiting {
+  animation: stepExit 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes stepEnter {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes stepExit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+}
+
+/* Анимация для карточек при появлении отключена */
+
+/* ===============================
+   ШАГ 0: ПРИВЕТСТВИЕ - ВСЁ ОТЦЕНТРОВАНО
+================================ */
+
+.welcome-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 60px 20px;
+  min-height: 450px;
+}
+
+/* Блок с персонажем и пузырём на шаге 0 */
+.welcome-character-block {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.welcome-character-block .chat-bubble {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.welcome-character-block .chat-bubble-bg {
+  width: 420px;
+  height: auto;
+  display: block;
+}
+
+.welcome-character-block .chat-bubble-text {
+  position: absolute;
+  left: 40px;
+  right: 55px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.welcome-character-block .chat-character img {
+  width: 280px;
+  height: auto;
+  display: block;
+}
+
+.welcome-right {
+  flex-shrink: 0;
+}
+
+.welcome-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  padding: 20px;
+  border-radius: 28px;
+  width: 320px;
+  background: linear-gradient(to right,
+    rgba(138, 170, 229, 0.5) 0%,
+    rgba(138, 170, 229, 0.3) 70%,
+    rgba(138, 170, 229, 0.0) 100%
+  );
+}
+
+.welcome-menu::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  border: 2px solid #15427d;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to right,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 60%,
+    rgba(0,0,0,0) 100%
+  );
+  mask-image: linear-gradient(to right,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 60%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+.menu-item {
+  background: #CCDAF4;
+  border-radius: 16px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.menu-item:hover {
+  background: #B8CCEE;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item.selected {
+  background: #6E90D0;
+}
+
+.menu-item.selected .menu-item-text {
+  color: #ffffff;
+}
+
+.menu-item-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: #0E1A2B;
+  line-height: 1.3;
+}
+
+/* ===============================
+   ПОМОЩНИК ДЛЯ ШАГОВ 1 и 2
+================================ */
+
+.chat-helper-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin:  auto;
+}
+
+.chat-helper {
+  display: none;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: -200px;
+  pointer-events: none;
+}
+
+.chat-helper.visible {
+  display: flex;
+}
+
+.chat-helper .chat-bubble {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.chat-helper .chat-bubble-bg {
+  width: 520px;
+  height: auto;
+  display: block;
+}
+
+.chat-helper .chat-bubble-text {
+  position: absolute;
+  left: 45px;
+  right: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.chat-helper .chat-character img {
+  width: 240px;
+  height: auto;
+  display: block;
+}
+
+/* ===============================
+   ПАНЕЛЬ С ОДНОЙ РАМКОЙ
+================================ */
+.choose-panel {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto 40px;
+  padding: 10px;
+  border-radius: 24px;
+  background: transparent;
+  overflow: hidden;        
+}
+
+.choose-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to right,
+    rgba(138, 170, 229, 0.75) 0%,
+    rgba(138, 170, 229, 0.55) 65%,
+    rgba(138, 170, 229, 0.0) 100%
+  );
+  -webkit-mask-image: linear-gradient(to right,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 65%,
+    rgba(0,0,0,0) 100%
+  );
+  mask-image: linear-gradient(to right,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 65%,
+    rgba(0,0,0,0) 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.choose-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 3px solid #15427d;
+  box-sizing: border-box;
+  -webkit-mask-image: linear-gradient(to right,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 65%,
+    rgba(0,0,0,0) 100%
+  );
+  mask-image: linear-gradient(to right,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 65%,
+    rgba(0,0,0,0) 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  z-index: 1;
+}
+
+.cards-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 203px);
+  gap: 40px 60px;
+  justify-items: center;
+}
+
+/* ===============================
+   КАРТОЧКИ (СТАРЫЙ СТИЛЬ С ИЗОБРАЖЕНИЯМИ)
+================================ */
+
+.card {
+  box-sizing: border-box;
+  width: 203px;
+  height: 300px;
+  border-radius: 24px;
+  background: #CCDAF4;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+  width: 100%;
+  height: 191px;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-label {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px 20px;
+  font-size: 22px;
+  color: #0E1A2B;
+  text-transform: lowercase;
+}
+
+.card.selected {
+  background: #6E90D0;
+  box-shadow: 0 16px 26px rgba(23, 59, 108, 0.35);
+  border: 5px solid #6E90D0;
+}
+
+.card.selected .card-image img {
+  border-radius: 18px 18px 0 0;
+}
+
+.card.selected .card-label {
+  background: #6E90D0;
+  color: #ffffff;
+}
+
+/* ===============================
+   ТЕКСТОВЫЕ КАРТОЧКИ (ШАГ 1 - НОВЫЙ СТИЛЬ)
+================================ */
+
+.skin-cards-panel {
+  padding: 20px;
+  margin-top: 80px;
+}
+
+.skin-cards-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  max-width: 780px;
+}
+
+/* ✅ НОВОЕ: Сетка на 4 колонки для бюджета */
+.skin-cards-grid--4cols {
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 900px;
+}
+
+.skin-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 22px 26px;
+  min-height: 110px;
+  border-radius: 20px;
+  background: #CCDAF4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 3px solid transparent;
+  text-align: left;
+}
+
+.skin-card:hover {
+  background: #B8CCEE;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.skin-card:active {
+  transform: translateY(-1px);
+}
+
+.skin-card-title {
+  font-size: 19px;
+  font-weight: 600;
+  color: #0E1A2B;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.skin-card-desc {
+  font-size: 15px;
+  font-weight: 400;
+  color: #4A5568;
+  line-height: 1.4;
+}
+
+/* Состояние выбрано (множественный выбор) */
+.skin-card.selected {
+  background: #6E90D0;
+  border-color: #15427d;
+  box-shadow: 0 8px 24px rgba(23, 59, 108, 0.3);
+}
+
+.skin-card.selected .skin-card-title {
+  color: #ffffff;
+}
+
+.skin-card.selected .skin-card-desc {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ===============================
+   NAV BUTTONS
+================================ */
+
+.nav-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: #000;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 50px;
+  font-size: 22px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  position: fixed;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.3s ease;
+  z-index: 100;
+}
+
+.nav-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.nav-btn-text {
+  white-space: nowrap;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.nav-btn-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 0;
+  transition: left 0.4s ease;
+}
+
+.nav-btn-circle img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transform: translateY(1px);
+}
+
+.nav-btn.animating {
+  background: linear-gradient(135deg, #4f46e5, #5f5bff);
+}
+
+.nav-btn.animating .nav-btn-text {
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+.nav-btn.animating .nav-btn-circle {
+  left: var(--circle-shift, 0px);
+}
+
+.nav-btn--back {
+  left: 60px;
+  bottom: 100px;
+}
+
+.nav-btn--next {
+  right: 60px;
+  bottom: 100px;
+}
+
+.nav-btn--back .nav-btn-circle {
+  order: 2;
+}
+
+.nav-btn--back .nav-btn-text {
+  order: 1;
+}
+
+.nav-btn--next .nav-btn-circle {
+  order: 1;
+}
+
+.nav-btn--next .nav-btn-text {
+  order: 2;
+}
+
+/* ✅ НОВОЕ: Анимация тряски для валидации */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.nav-btn.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* ===============================
+   ПАНЕЛЬ ОПЦИЙ (ШАГ 2)
+================================ */
+
+.options-panel {
+  width: 600px;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+.options-panel .options-list {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0;
+}
+
+.options-panel .option-item {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 28px;
+  background: #CCDAF4;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 3px solid transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.options-panel .option-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  background: #B8CCEE;
+}
+
+.options-panel .option-item input[type="radio"] {
+  display: none;
+}
+
+.options-panel .option-item .option-text {
+  font-size: 18px;
+  color: #0E1A2B;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.options-panel .option-item.selected,
+.options-panel .option-item:has(input:checked) {
+  background: #6E90D0;
+  border-color: #15427d;
+  box-shadow: 0 8px 24px rgba(23, 59, 108, 0.3);
+}
+
+.options-panel .option-item.selected .option-text,
+.options-panel .option-item:has(input:checked) .option-text {
+  color: #ffffff;
+}
+
+.options-panel .option-item::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 3px solid #15427d;
+  background: #fff;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.options-panel .option-item.selected::before,
+.options-panel .option-item:has(input:checked)::before {
+  background: #15427d;
+  border-color: #fff;
+  box-shadow: inset 0 0 0 4px #fff;
+}
+
+
+
+
+/* ===============================
+   АЛЛЕРГИЯ — ТЕКСТОВОЕ ПОЛЕ
+================================ */
+
+.allergy-input {
+  margin-top: 24px;
+  max-width: 780px;
+  width: 100%;
+}
+
+.allergy-input.hidden {
+  display: none;
+}
+
+.allergy-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  border: 3px solid #15427d;
+  background: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.allergy-textarea::placeholder {
+  color: #8a94a6;
+}
+
+.allergy-textarea:focus {
+  border-color: #6E90D0;
+  box-shadow: 0 0 0 4px rgba(110, 144, 208, 0.2);
+}
+
+
+
+
+/* ====== АДАПТИВ ====== */
+
+@media (max-width: 1200px) {
+  .welcome-character-block .chat-bubble-bg {
+    width: 360px;
+  }
+
+  .welcome-character-block .chat-bubble-text {
+    font-size: 20px;
+    left: 35px;
+    right: 50px;
+  }
+
+  .welcome-character-block .chat-character img {
+    width: 240px;
+  }
+
+  .welcome-menu {
+    width: 300px;
+  }
+
+  .menu-item {
+    padding: 14px 18px;
+  }
+
+  .menu-item-text {
+    font-size: 14px;
+  }
+
+  .chat-helper .chat-bubble-bg {
+    width: 450px;
+  }
+
+  .chat-helper .chat-bubble-text {
+    font-size: 24px;
+  }
+
+  .chat-helper .chat-character img {
+    width: 240px;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px 40px;
+    max-width: 650px;
+  }
+
+  .card {
+    width: 190px;
+    height: 280px;
+  }
+
+  .skin-cards-panel {
+    margin-top: 60px;
+  }
+
+  .skin-cards-grid {
+    max-width: 700px;
+    gap: 16px;
+  }
+
+  /* ✅ НОВОЕ: адаптив для 4-колоночной сетки */
+  .skin-cards-grid--4cols {
+    max-width: 800px;
+  }
+
+  .skin-card {
+    padding: 20px 22px;
+    min-height: 100px;
+  }
+
+  .skin-card-title {
+    font-size: 18px;
+  }
+
+  .skin-card-desc {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 992px) {
+  .welcome-layout {
+    flex-direction: column;
+    gap: 30px;
+    padding: 40px 20px;
+  }
+
+  .welcome-character-block {
+    justify-content: center;
+  }
+
+  .welcome-menu {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 520px;
+    gap: 30px;
+  }
+
+  .card {
+    width: 200px;
+    height: 290px;
+  }
+
+  .skin-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 480px;
+    gap: 12px;
+  }
+
+  /* ✅ НОВОЕ: 4-колоночная сетка становится 2-колоночной */
+  .skin-cards-grid--4cols {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 480px;
+  }
+
+  .skin-card {
+    padding: 16px 18px;
+    min-height: 85px;
+  }
+
+  .options-panel {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-character-block .chat-bubble-bg {
+    width: 300px;
+  }
+
+  .welcome-character-block .chat-bubble-text {
+    font-size: 18px;
+    left: 25px;
+    right: 40px;
+  }
+
+  .welcome-character-block .chat-character img {
+    width: 180px;
+  }
+
+  .chat-helper .chat-bubble-bg {
+    width: 350px;
+  }
+
+  .chat-helper .chat-bubble-text {
+    font-size: 20px;
+  }
+
+  .chat-helper .chat-character img {
+    width: 180px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    max-width: 260px;
+  }
+
+  .card {
+    width: 100%;
+    height: 280px;
+  }
+
+  .skin-cards-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    gap: 12px;
+  }
+
+  /* ✅ НОВОЕ: 4-колоночная сетка становится 2-колоночной на мобильных */
+  .skin-cards-grid--4cols {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 320px;
+  }
+
+  .skin-card {
+    padding: 18px 20px;
+    min-height: auto;
+  }
+
+  .nav-btn--back {
+    left: 20px;
+    bottom: 30px;
+  }
+
+  .nav-btn--next {
+    right: 20px;
+    bottom: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-character-block .chat-bubble-bg {
+    width: 260px;
+  }
+
+  .welcome-character-block .chat-bubble-text {
+    font-size: 16px;
+    left: 20px;
+    right: 35px;
+  }
+
+  .welcome-character-block .chat-character img {
+    width: 140px;
+  }
+
+  .menu-item {
+    padding: 12px 14px;
+  }
+
+  .menu-item-text {
+    font-size: 13px;
+  }
+
+  .skin-cards-grid {
+    max-width: 280px;
+    gap: 10px;
+  }
+
+  /* ✅ НОВОЕ: адаптив для маленьких экранов */
+  .skin-cards-grid--4cols {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 280px;
+  }
+
+  .skin-card {
+    padding: 14px 16px;
+  }
+
+  .skin-card-title {
+    font-size: 15px;
+  }
+
+  .skin-card-desc {
+    font-size: 12px;
+  }
+}
+
+/* ===============================
+   ШАГ РЕЗУЛЬТАТА
+================================ */
+
+.results-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Контейнер для ответа ИИ */
+.ai-response-container {
+  background: #ffffff;
+  border-radius: 24px;
+  min-height: 400px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(110, 144, 208, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Состояние загрузки */
+.ai-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  z-index: 10;
+}
+
+.ai-loading.hidden {
+  display: none;
+}
+
+.ai-loading-animation {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.ai-loading-animation span {
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, #6E90D0 0%, #8AAAE5 100%);
+  border-radius: 50%;
+  animation: loadingBounce 1.4s ease-in-out infinite;
+}
+
+.ai-loading-animation span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.ai-loading-animation span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loadingBounce {
+  0%, 60%, 100% { 
+    transform: translateY(0) scale(1); 
+  }
+  30% { 
+    transform: translateY(-16px) scale(1.1); 
+  }
+}
+
+.ai-loading-text {
+  font-size: 18px;
+  color: #6B7280;
+  margin: 0;
+  animation: loadingPulse 2s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Контент ответа ИИ */
+.ai-response-content {
+  padding: 32px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #374151;
+}
+
+.ai-response-content:empty {
+  display: none;
+}
+
+.ai-response-content:not(:empty) + .ai-loading,
+.ai-response-content:not(:empty) ~ .ai-loading {
+  display: none;
+}
+
+/* Состояние ошибки */
+.ai-error {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6B7280;
+}
+
+.ai-error p {
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Кнопки действий результата */
+.results-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.results-actions.hidden {
+  display: none;
+}
+
+.results-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: none;
+  font-family: inherit;
+}
+
+.results-btn--secondary {
+  background: #ffffff;
+  color: #374151;
+  border: 2px solid #E5E7EB;
+}
+
+.results-btn--secondary:hover {
+  background: #F9FAFB;
+  border-color: #D1D5DB;
+  transform: translateY(-2px);
+}
+
+.results-btn--primary {
+  background: linear-gradient(135deg, #6E90D0 0%, #8AAAE5 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(110, 144, 208, 0.35);
+}
+
+.results-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(110, 144, 208, 0.45);
+}
+
+/* ===============================
+   АДАПТИВ ДЛЯ РЕЗУЛЬТАТА
+================================ */
+
+@media (max-width: 768px) {
+  .results-wrapper {
+    padding: 10px;
+  }
+
+  .ai-response-container {
+    min-height: 300px;
+    border-radius: 20px;
+  }
+
+  .ai-response-content {
+    padding: 24px 20px;
+    font-size: 15px;
+  }
+
+  .ai-loading-text {
+    font-size: 16px;
+  }
+
+  .results-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .results-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-response-content {
+    padding: 20px 16px;
+    font-size: 14px;
+  }
+
+  .ai-loading-animation span {
+    width: 12px;
+    height: 12px;
+  }
+
+  .results-btn {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,369 @@
+/* Общий фон и позиционирование */
+
+.auth-page {
+  padding-top: 200px;
+  padding-bottom: 80px;
+  background-color: #ffffff;
+}
+
+.auth-register,
+.auth-login {
+  width: 420px;
+  margin: 0 auto;
+}
+
+/* Переключение секций */
+.auth-section {
+  display: none;
+}
+
+.auth-section.active {
+  display: block;
+}
+
+/* Опции входа (запомнить меня + забыли пароль) */
+.auth-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -4px;
+}
+
+.auth-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.auth-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #2563eb;
+}
+
+.auth-checkbox-text {
+  font-size: 14px;
+  color: #374151;
+}
+
+.auth-forgot-link {
+  font-size: 14px;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.auth-forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Заголовок и текст "Уже есть аккаунт?" */
+.auth-title-main {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.auth-switch {
+  margin: 0 0 32px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.auth-switch-link {
+  color: #2563eb;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.auth-switch-link:hover {
+  text-decoration: underline;
+}
+
+/* Форма */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Поля */
+.auth-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-label {
+  font-size: 14px;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+  background-color: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+}
+
+/* Обёртка для input + иконка (пароль) */
+.auth-input-wrapper {
+  position: relative;
+}
+
+.auth-input--password {
+  padding-right: 36px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  color: #9ca3af;
+  line-height: 1;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle:hover {
+  color: #6b7280;
+}
+
+/* Телефон с intl-tel-input */
+.auth-field[data-field="phone"] .iti {
+  width: 100%;
+}
+
+.auth-field[data-field="phone"] .iti__tel-input {
+  width: 100%;
+  padding: 10px 12px 10px 52px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+  background-color: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth-field[data-field="phone"] .iti__tel-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+}
+
+.auth-field--error .iti__tel-input {
+  border-color: #e11d48 !important;
+  box-shadow: none !important;
+}
+
+/* Стили для dropdown */
+.iti__country-list {
+  max-height: 250px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.iti__country {
+  padding: 8px 10px;
+}
+
+.iti__country:hover {
+  background-color: #f3f4f6;
+}
+
+.iti__country--highlight {
+  background-color: #eff6ff;
+}
+
+/* Ошибки */
+.auth-error-message {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #e11d48;
+  display: none;
+}
+
+.auth-field--error .auth-input,
+.auth-field--error .phone-input-wrapper {
+  border-color: #e11d48;
+  box-shadow: none;
+}
+
+.auth-field--error .auth-error-message {
+  display: block;
+}
+
+/* Кнопка - более скруглённая как на втором скриншоте */
+.auth-submit {
+  margin-top: 8px;
+  padding: 14px 16px;
+  width: 100%;
+  border: none;
+  border-radius: 25px; /* более овальная форма */
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #d7df74; /* жёлтая, как на скрине */
+  color: #111827;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.auth-submit:hover {
+  background-color: #c9d45a;
+  transform: translateY(-1px);
+}
+
+.auth-submit:active {
+  transform: translateY(0);
+}
+
+/* ====== ФУТЕР - СОЦСЕТИ (ИСПРАВЛЕНО) ====== */
+
+.footer-social-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-social-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-decoration: none;
+  min-width: 140px;
+}
+
+.footer-social-text {
+  color: #ffffff;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.footer-social-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ====== АДАПТИВ ====== */
+
+/* Ноутбуки и небольшие экраны */
+@media (max-width: 1200px) {
+  .auth-page {
+    padding-top: 160px;
+    padding-bottom: 60px;
+  }
+
+  .auth-register,
+  .auth-login {
+    width: 460px;      /* чуть шире, чтобы на ноутах форма не была слишком узкой */
+  }
+}
+
+/* Планшеты */
+@media (max-width: 992px) {
+  .auth-page {
+    padding-top: 140px;
+    padding-bottom: 50px;
+  }
+
+  .auth-register,
+  .auth-login {
+    width: 80%;        /* вместо фикс 420px — процент */
+    max-width: 420px;
+  }
+
+  .auth-title-main {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .auth-switch {
+    text-align: center;
+  }
+}
+
+/* Телефоны */
+@media (max-width: 768px) {
+  .auth-page {
+    padding-top: 120px;
+    padding-bottom: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .auth-register,
+  .auth-login {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .auth-title-main {
+    font-size: 24px;
+  }
+
+  .auth-form {
+    gap: 16px;
+  }
+
+  .auth-input,
+  .phone-input {
+    font-size: 13px;
+    padding: 9px 11px;
+  }
+
+  .auth-submit {
+    font-size: 14px;
+    padding: 11px 14px;
+  }
+}
+
+/* Очень маленькие телефоны */
+@media (max-width: 480px) {
+  .auth-page {
+    padding-top: 100px;
+    padding-bottom: 30px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .auth-register,
+  .auth-login {
+    max-width: 100%;
+  }
+
+  .auth-title-main {
+    font-size: 22px;
+  }
+
+  .auth-switch {
+    font-size: 13px;
+  }
+
+  .auth-label {
+    font-size: 13px;
+  }
+
+  .auth-error-message {
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История рекомендаций - BeauTips</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./base.css">
+    <link rel="stylesheet" href="./history.css">
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="navbar">
+        <div class="logo-nav-container">
+            <div class="logo">
+                <img id="logo" src="./images/logo.png" alt="BeauTips logo">
+            </div>
+
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="./index.html" class="nav-link">Главная</a></li>
+                    <li><a href="./index.html#about" class="nav-link">О нас</a></li>
+                    <li><a href="./index.html#footer22" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="search-profile">
+            <div class="profile-wrapper">
+                <a href="./profile.html" class="profile-icon">
+                    <img src="./images/profile.png" alt="Profile icon">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="history-page">
+        <div class="history-container">
+            
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="history-title">История рекомендаций</h1>
+                    <p class="history-subtitle">Ваши прошлые результаты анализа кожи</p>
+                </div>
+                <button onclick="exportToCSV()" class="btn btn-outline">
+                    <span>📥</span>
+                    <span>Экспорт CSV</span>
+                </button>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div id="statsContainer" class="stats-container" style="display: none;">
+                <!-- Stats будут добавлены через JS -->
+            </div>
+
+            <!-- Filters Section -->
+            <div class="filters-section">
+                <div class="filters-row">
+                    <!-- Search -->
+                    <div class="filter-group">
+                        <label for="searchInput">🔍 Поиск</label>
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            class="filter-input" 
+                            placeholder="Поиск по анализу..."
+                        >
+                    </div>
+
+                    <!-- Scenario Filter -->
+                    <div class="filter-group">
+                        <label for="scenarioFilter">📋 Сценарий</label>
+                        <select id="scenarioFilter" class="filter-select">
+                            <option value="">Все сценарии</option>
+                            <option value="Подобрать уход для моей кожи">Подбор ухода</option>
+                            <option value="Можно ли сочетать эти средства?">Совместимость средств</option>
+                            <option value="Разобрать мою косметику">Разбор косметики</option>
+                            <option value="Объясни, как использовать средство">Инструкция</option>
+                        </select>
+                    </div>
+
+                    <!-- Sort -->
+                    <div class="filter-group">
+                        <label for="sortBy">⬇️ Сортировка</label>
+                        <select id="sortBy" class="filter-select">
+                            <option value="date-desc">Новые первые</option>
+                            <option value="date-asc">Старые первые</option>
+                            <option value="scenario-asc">По сценарию (А-Я)</option>
+                            <option value="scenario-desc">По сценарию (Я-А)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Date Range Filter -->
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label for="dateFrom">📅 От</label>
+                        <input 
+                            type="date" 
+                            id="dateFrom" 
+                            class="filter-input"
+                        >
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="dateTo">📅 До</label>
+                        <input 
+                            type="date" 
+                            id="dateTo" 
+                            class="filter-input"
+                        >
+                    </div>
+
+                    <div class="filter-group">
+                        <button onclick="resetFilters()" class="btn btn-secondary" style="margin-top: 24px;">
+                            🔄 Сбросить фильтры
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading" class="loading-state">
+                <div class="spinner"></div>
+                <p>Загрузка истории...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error" class="error-state" style="display: none;">
+                <p id="errorMessage">Ошибка загрузки</p>
+                <button onclick="loadHistory()" class="retry-btn">Попробовать снова</button>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty" class="empty-state" style="display: none;">
+                <div class="empty-icon">📋</div>
+                <h2>Пока нет истории</h2>
+                <p>Пройдите квиз, чтобы получить первые рекомендации</p>
+                <a href="./chat.html" class="start-quiz-btn">Пройти квиз</a>
+            </div>
+
+            <!-- History List -->
+            <div id="historyList" class="history-list" style="display: none;">
+                <!-- История будет добавлена через JS -->
+            </div>
+
+            <!-- Pagination -->
+            <div id="pagination" class="pagination" style="display: none;">
+                <!-- Пагинация будет добавлена через JS -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer22">
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <img src="./images/logo.png" alt="Beautips logo">
+            </div>
+
+            <div class="footer-right">
+                <div class="footer-social-label">Social media</div>
+
+                <div class="footer-social-list">
+                    <a href="https://www.tiktok.com/@beautips.kg?_r=1&_t=ZS-92QRBdhPfsG" class="footer-social-row"
+                        target="_blank">
+                        <span class="footer-social-text">Tik Tok</span>
+                        <img src="./images/tiktok.png" alt="TikTok" class="footer-social-icon">
+                    </a>
+                    <a href="https://t.me/+_rdDXP1OQ_kwNDNi" class="footer-social-row" target="_blank">
+                        <span class="footer-social-text">Telegram</span>
+                        <img src="./images/telegram.png" alt="Telegram" class="footer-social-icon">
+                    </a>
+                    <a href="https://www.instagram.com/beautips.kg" class="footer-social-row" target="_blank">
+                        <span class="footer-social-text">Instagram</span>
+                        <img src="./images/instagram.png" alt="Instagram" class="footer-social-icon">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./api.js"></script>
+    <script src="./history.js"></script>
+</body>
+
+</html>
