@@ -17,20 +17,20 @@ logging.basicConfig(
 
 from backend.database import get_db, engine, Base
 
-from models import User, QuizSession, QuizAnswer
-from schemas import (
+from backend.models import User, QuizSession, QuizAnswer
+from backend.schemas import (
     UserCreate, UserLogin, UserResponse, Token,
     QuizSaveRequest, QuizSaveResponse, QuizDataResponse,
     QuizSubmitRequest, QuizSubmitResponse
 )
-from auth import (
+from backend.auth import (
     get_password_hash, verify_password, create_access_token,
     get_current_user, ACCESS_TOKEN_EXPIRE_MINUTES
 )
-from routers.auth_router import router as auth_router
-from routers.history_router import router as history_router
+from backend.routers.auth_router import router as auth_router
+from backend.routers.history_router import router as history_router
 
-from exceptions import (
+from backend.exceptions import (
     BeauTipsException,
     SessionNotFoundError,
     AnswersNotFoundError,
