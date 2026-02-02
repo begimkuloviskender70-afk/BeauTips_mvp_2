@@ -15,7 +15,8 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 
-from database import get_db, engine, Base
+from backend.database import get_db, engine, Base
+
 from models import User, QuizSession, QuizAnswer
 from schemas import (
     UserCreate, UserLogin, UserResponse, Token,
